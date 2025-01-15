@@ -12,14 +12,20 @@ public struct OrbView: View {
     public init(configuration: OrbConfiguration = OrbConfiguration()) {
         self.config = configuration
     }
-
+    
+    @State package var showBackground: Bool = true
+    @State package var showWavyBlobs: Bool = true
+    @State package var showParticles: Bool = true
+    @State package var showGlowEffects: Bool = true
+    @State package var showShadow: Bool = true
+    
     public var body: some View {
         GeometryReader { geometry in
             let size = min(geometry.size.width, geometry.size.height)
 
             ZStack {
                 // Base gradient background layer
-                if config.showBackground {
+                if showBackground {
                     background
                 }
                 
@@ -27,18 +33,18 @@ public struct OrbView: View {
                 baseDepthGlows(size: size)
 
                 // Adds organic movement with flowing blob shapes
-                if config.showWavyBlobs {
+                if showWavyBlobs {
                     wavyBlob
                     wavyBlobTwo
                 }
 
                 // Adds bright, energetic core glow animations
-                if config.showGlowEffects {
+                if showGlowEffects {
                     coreGlowEffects(size: size)
                 }
 
                 // Overlays floating particle effects for additional dynamism
-                if config.showParticles {
+                if showParticles {
                     particleView
                         .frame(maxWidth: size, maxHeight: size)
                 }
@@ -55,7 +61,7 @@ public struct OrbView: View {
             // Adding realistic, layered shadows so its brighter near the core, and softer as it grows outwards
             .modifier(
                 RealisticShadowModifier(
-                    colors: config.showShadow ? config.backgroundColors : [.clear],
+                    colors: showShadow ? config.backgroundColors : [.clear],
                     radius: size * 0.08
                 )
             )
