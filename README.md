@@ -59,7 +59,7 @@ struct ContentView: View {
 
 ![image](https://github.com/user-attachments/assets/4b51ca16-889b-4a0a-80e5-9256c51825b8)
 
-The `OrbView` can be customized using `OrbConfiguration`:
+The `OrbView` can be customized using `OrbConfiguration` and OrbView modifiers:
 
 
 ```swift
@@ -67,16 +67,16 @@ let configuration = OrbConfiguration(
     backgroundColors: [.purple, .blue, .pink], // Custom gradient colors
     glowColor: .white,                         // Glow effect color
     particleColor: .white,                     // Particle effect color
-    coreGlowIntensity: 1.2,                   // Intensity of the core glow
-    showBackground: true,                      // Toggle background visibility
-    showWavyBlobs: true,                      // Toggle organic movement elements
-    showParticles: true,                      // Toggle particle effects
-    showGlowEffects: true,                    // Toggle glow effects
-    showShadow: true,                         // Toggle shadow effects
-    speed: 60                                 // Animation speed
+    coreGlowIntensity: 1.2,                    // Intensity of the core glow
+    speed: 60                                  // Animation speed
 )
 
 OrbView(configuration: configuration)
+    .enableBackground(true)                    // Shows/hides the gradient background
+    .enableWavyBlobs(true)                     // Shows/hides organic movement elements
+    .enableParticles(true)                     // Shows/hides particle effects
+    .enableGlowEffects(true)                   // Shows/hides glow effects
+    .enableShadow(true)                        // Shows/hides shadow effects
     .frame(width: 200, height: 200)
 ```
 
@@ -88,11 +88,6 @@ OrbView(configuration: configuration)
 | `glowColor` | `Color` | `.white` | Color of the glow effects |
 | `particleColor` | `Color` | `.white` | Color of the particle effects |
 | `coreGlowIntensity` | `Double` | `1.0` | Intensity of the core glow effect (higher = brighter) |
-| `showBackground` | `Bool` | `true` | Shows/hides the gradient background |
-| `showWavyBlobs` | `Bool` | `true` | Shows/hides organic movement elements |
-| `showParticles` | `Bool` | `true` | Shows/hides particle effects |
-| `showGlowEffects` | `Bool` | `true` | Shows/hides glow effects |
-| `showShadow` | `Bool` | `true` | Shows/hides shadow effects |
 | `speed` | `Double` | `60` | Animation speed (higher = faster) |
 
 ### Preset Configurations
@@ -107,12 +102,16 @@ let mysticOrb = OrbConfiguration(
     coreGlowIntensity: 1.2
 )
 
+OrbView(configuration: mysticOrb)
+
 // Nature
 let natureOrb = OrbConfiguration(
     backgroundColors: [.green, .mint, .teal],
     glowColor: .green,
     speed: 45
 )
+
+OrbView(configuration: natureOrb)
 
 // Sunset
 let sunsetOrb = OrbConfiguration(
@@ -121,6 +120,8 @@ let sunsetOrb = OrbConfiguration(
     coreGlowIntensity: 0.8
 )
 
+OrbView(configuration: sunsetOrb)
+
 // Ocean
 let oceanOrb = OrbConfiguration(
     backgroundColors: [.blue, .cyan, .teal],
@@ -128,14 +129,18 @@ let oceanOrb = OrbConfiguration(
     speed: 75
 )
 
+OrbView(configuration: oceanOrb)
+
 // Minimal
 let minimalOrb = OrbConfiguration(
     backgroundColors: [.gray, .white],
     glowColor: .white,
-    showWavyBlobs: false,
-    showParticles: false,
     speed: 30
 )
+
+OrbView(configuration: minimalOrb)
+.enableWavyBlobs(false)
+.enableParticles(false)
 
 // Cosmic
 let cosmicOrb = OrbConfiguration(
@@ -145,6 +150,8 @@ let cosmicOrb = OrbConfiguration(
     speed: 90
 )
 
+OrbView(configuration: cosmicOrb)
+
 // Fire
 let fireOrb = OrbConfiguration(
     backgroundColors: [.red, .orange, .yellow],
@@ -153,22 +160,28 @@ let fireOrb = OrbConfiguration(
     speed: 80
 )
 
+OrbView(configuration: fireOrb)
+
 // Arctic
 let arcticOrb = OrbConfiguration(
     backgroundColors: [.cyan, .white, .blue],
     glowColor: .white,
     coreGlowIntensity: 0.75,
-    showParticles: true,
     speed: 40
 )
+
+OrbView(configuration: arcticOrb)
+.enableParticles(false)
 
 // Shadow
 let shadowOrb = OrbConfiguration(
     backgroundColors: [.black, .gray],
     glowColor: .gray,
-    coreGlowIntensity: 0.7,
-    showParticles: false
+    coreGlowIntensity: 0.7
 )
+
+OrbView(configuration: shadowOrb)
+.enableParticles(false)
 ```
 
 ## Requirements
